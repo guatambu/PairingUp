@@ -37,6 +37,11 @@ class PairingUpTableViewController: UITableViewController {
         createAlert()
     }
     
+    @IBAction func randomizeButtonTapped(_ sender: UIButton) {
+        
+        createRandomPairs()
+    }
+    
 
     // MARK: - Table view data source
 
@@ -133,6 +138,10 @@ extension PairingUpTableViewController {
         alert.addAction(add)
         
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func createRandomPairs() {
+        print("yay")
     }
     
 }
