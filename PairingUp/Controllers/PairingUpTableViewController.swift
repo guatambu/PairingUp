@@ -12,6 +12,10 @@ class PairingUpTableViewController: UITableViewController {
     
     // MARK: - Properties
     
+    var sections = ["people to be paired up"]
+    
+    var pairs: [[Person]] = []
+    
     
     // MARK: - ViewController Lifecycle Functions
 
@@ -30,24 +34,43 @@ class PairingUpTableViewController: UITableViewController {
     
     @IBAction func addPersonButtonTapped(_ sender: UIBarButtonItem) {
         
+        createAlert()
     }
     
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        
+        return sections.count
+        
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        
+        if section == 0 {
+            // return the total list of people the user has added to their pairing list
+            return PersonModelController.shared.persons.count
+            
+        } else {
+            // there will only be one pair returned for each section, with each section showing a randomly generated pair
+            return 1
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "pairCell", for: indexPath) as? PairTableViewCell else {
+            
+            print("ERROR: there was an error where a nil vlaue was found when creating the PairTableViewCell in PairingUpTableViewController.swift -> tableView(cellForRowAt:) - line 64.")
+            return UITableViewCell()
+        }
+        
+        if indexPath.section == 0 {
+            
+            cell.person = PersonModelController.shared.persons[indexPath.row]
+        }
+ 
         // Configure the cell...
 
         return cell
@@ -61,17 +84,55 @@ class PairingUpTableViewController: UITableViewController {
 
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
         if editingStyle == .delete {
-            // Delete the row from the data source
+            
+            // Delete the person from the data source of truth
+            PersonModelController.shared.delete(person: PersonModelController.shared.persons[indexPath.row])
+            // Delete the row from the tableView
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            
+        }
     }
 }
 
 
 // MARK: - Helper Functions
 extension PairingUpTableViewController {
+    
+    func createAlert() {
+        
+        let alert = UIAlertController(title: "Add Person", message: "this person will be used for pairing up", preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "enter a person's name"        }
+        
+        let cancel = UIAlertAction(title: "cancel", style: UIAlertAction.Style.cancel, handler: nil)
+        let add = UIAlertAction(title: "add", style: UIAlertAction.Style.default) { (action:UIAlertAction) in
+            
+            guard let textField =  alert.textFields?.first else {
+                print("ERROR: no UITextField found in alert in PersonTableViewController.swift -> createAlert() - line 91.")
+                return
+            }
+            
+            if textField.text != "" {
+                
+                let person = Person(name: textField.text ?? "")
+                
+                PersonModelController.shared.add(person: person)
+                
+                self.tableView.reloadData()
+                
+            } else {
+                
+                return
+            }
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(add)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
     
 }

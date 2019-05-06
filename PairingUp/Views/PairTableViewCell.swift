@@ -30,6 +30,13 @@ class PairTableViewCell: UITableViewCell {
     
     // MARK: - Helper Functions
     func updateViews() {
-        print("yay")
+        
+        if let person = person {
+            
+            person1LabelOutlet.text = person.name ?? ""
+            
+            person2LabelOutlet.text = ""
+            
+        }
     }
 }
