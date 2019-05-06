@@ -14,7 +14,7 @@ class PairingUpTableViewController: UITableViewController {
     
     var sections = ["people to be paired up"]
     
-    var pairs: [[Person]] = []
+    var pairs: [(Person, Person)] = []
     
     @IBOutlet weak var randomizeButtonOutlet: UIButton!
     
@@ -203,9 +203,13 @@ extension PairingUpTableViewController {
             
             people.shuffle()
             
-            for person in people {
+            pairs = stride(from: 0, to: people.count - 1, by: 2).map {
+                (people[$0], people[$0+1])
+            }
+            
+            for _ in pairs {
                 
-                pairs.append([person])
+                //pairs.append([person])
                 
                 pairCounter += 1
                 
