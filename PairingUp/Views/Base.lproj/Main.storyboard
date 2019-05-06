@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--Pairing Up Table View Controller-->
         <scene sceneID="Lmu-wv-aOh">
             <objects>
-                <tableViewController id="Qpc-9W-xYL" sceneMemberID="viewController">
+                <tableViewController id="Qpc-9W-xYL" customClass="PairingUpTableViewController" customModule="PairingUp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="1IU-DL-fuk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -38,7 +38,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="pairCell" id="P2b-UX-THj">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="pairCell" id="P2b-UX-THj" customClass="PairTableViewCell" customModule="PairingUp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P2b-UX-THj" id="lTL-Ag-jwM">
@@ -69,6 +69,10 @@
                                         <constraint firstAttribute="trailing" secondItem="phl-il-3C4" secondAttribute="trailing" constant="16" id="frj-Nm-gS7"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="person1LabelOutlet" destination="pGj-V0-eyk" id="0Fv-hb-oR1"/>
+                                    <outlet property="person2LabelOutlet" destination="CRJ-pk-zQE" id="p1O-zT-6xM"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -77,7 +81,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Qd1-uy-cL3">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="3t7-hL-VgX"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="3t7-hL-VgX">
+                            <connections>
+                                <action selector="addPersonButtonTapped:" destination="Qpc-9W-xYL" id="bED-fL-5WV"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XcU-08-RKO" userLabel="First Responder" sceneMemberID="firstResponder"/>
