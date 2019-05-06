@@ -129,9 +129,10 @@ extension PairingUpTableViewController {
             }
         }
         
-        
         alert.addAction(cancel)
         alert.addAction(add)
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
 }
