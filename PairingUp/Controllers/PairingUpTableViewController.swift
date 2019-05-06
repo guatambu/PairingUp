@@ -28,6 +28,9 @@ class PairingUpTableViewController: UITableViewController {
     
     // MARK: - Actions
     
+    @IBAction func addPersonButtonTapped(_ sender: UIBarButtonItem) {
+        
+    }
     
 
     // MARK: - Table view data source
