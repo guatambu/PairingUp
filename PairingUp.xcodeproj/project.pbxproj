@@ -13,6 +13,11 @@
 		FA46D01B227FE1670024AE6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA46D01A227FE1670024AE6E /* Assets.xcassets */; };
 		FA46D01E227FE1670024AE6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA46D01C227FE1670024AE6E /* LaunchScreen.storyboard */; };
 		FA46D029227FE1670024AE6E /* PairingUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA46D028227FE1670024AE6E /* PairingUpTests.swift */; };
+		FA46D035227FE4440024AE6E /* PairTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA46D034227FE4440024AE6E /* PairTableViewCell.swift */; };
+		FA46D037227FE45F0024AE6E /* PairingUpTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA46D036227FE45F0024AE6E /* PairingUpTableViewController.swift */; };
+		FA46D039227FE47C0024AE6E /* PersonModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA46D038227FE47C0024AE6E /* PersonModelController.swift */; };
+		FA46D03B227FE48F0024AE6E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA46D03A227FE48F0024AE6E /* CoreDataStack.swift */; };
+		FA46D03D227FE4A40024AE6E /* Person+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA46D03C227FE4A40024AE6E /* Person+Convenience.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +41,11 @@
 		FA46D024227FE1670024AE6E /* PairingUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PairingUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA46D028227FE1670024AE6E /* PairingUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingUpTests.swift; sourceTree = "<group>"; };
 		FA46D02A227FE1670024AE6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA46D034227FE4440024AE6E /* PairTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairTableViewCell.swift; sourceTree = "<group>"; };
+		FA46D036227FE45F0024AE6E /* PairingUpTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingUpTableViewController.swift; sourceTree = "<group>"; };
+		FA46D038227FE47C0024AE6E /* PersonModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModelController.swift; sourceTree = "<group>"; };
+		FA46D03A227FE48F0024AE6E /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		FA46D03C227FE4A40024AE6E /* Person+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+Convenience.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +87,9 @@
 		FA46D00F227FE1650024AE6E /* PairingUp */ = {
 			isa = PBXGroup;
 			children = (
-				FA46D017227FE1660024AE6E /* PairingUp.xcdatamodeld */,
-				FA46D014227FE1660024AE6E /* Main.storyboard */,
+				FA46D040227FE4D70024AE6E /* Models */,
+				FA46D03F227FE4C80024AE6E /* Views */,
+				FA46D03E227FE4BB0024AE6E /* Controllers */,
 				FA46D033227FE17C0024AE6E /* App Resources */,
 			);
 			path = PairingUp;
@@ -98,10 +109,38 @@
 			children = (
 				FA46D010227FE1650024AE6E /* AppDelegate.swift */,
 				FA46D01A227FE1670024AE6E /* Assets.xcassets */,
-				FA46D01C227FE1670024AE6E /* LaunchScreen.storyboard */,
 				FA46D01F227FE1670024AE6E /* Info.plist */,
 			);
 			path = "App Resources";
+			sourceTree = "<group>";
+		};
+		FA46D03E227FE4BB0024AE6E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FA46D036227FE45F0024AE6E /* PairingUpTableViewController.swift */,
+				FA46D038227FE47C0024AE6E /* PersonModelController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FA46D03F227FE4C80024AE6E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA46D01C227FE1670024AE6E /* LaunchScreen.storyboard */,
+				FA46D014227FE1660024AE6E /* Main.storyboard */,
+				FA46D034227FE4440024AE6E /* PairTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FA46D040227FE4D70024AE6E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FA46D03A227FE48F0024AE6E /* CoreDataStack.swift */,
+				FA46D017227FE1660024AE6E /* PairingUp.xcdatamodeld */,
+				FA46D03C227FE4A40024AE6E /* Person+Convenience.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,8 +244,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA46D039227FE47C0024AE6E /* PersonModelController.swift in Sources */,
 				FA46D011227FE1660024AE6E /* AppDelegate.swift in Sources */,
+				FA46D035227FE4440024AE6E /* PairTableViewCell.swift in Sources */,
+				FA46D03D227FE4A40024AE6E /* Person+Convenience.swift in Sources */,
+				FA46D03B227FE48F0024AE6E /* CoreDataStack.swift in Sources */,
 				FA46D019227FE1660024AE6E /* PairingUp.xcdatamodeld in Sources */,
+				FA46D037227FE45F0024AE6E /* PairingUpTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
