@@ -30,6 +30,9 @@ class PairingUpTableViewController: UITableViewController {
     
     @IBAction func addPersonButtonTapped(_ sender: UIBarButtonItem) {
         
+        createAlert()
+        
+        
     }
     
 
@@ -73,5 +76,19 @@ class PairingUpTableViewController: UITableViewController {
 
 // MARK: - Helper Functions
 extension PairingUpTableViewController {
+    
+    func createAlert() {
+        
+        let alert = UIAlertController(title: "Add Person", message: "this person will be used for pairing up", preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "enter a person's name"        }
+        
+        let cancel = UIAlertAction(title: "cancel", style: UIAlertAction.Style.cancel, handler: nil)
+        let add = UIAlertAction(title: "add", style: UIAlertAction.Style.default) { (<#UIAlertAction#>) in
+            <#code#>
+        }
+        
+    }
     
 }
