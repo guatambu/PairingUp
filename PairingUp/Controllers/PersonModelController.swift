@@ -35,7 +35,7 @@ class PersonModelController {
         saveToPersistentStorage()
     }
     
-    // Update
+    // Update (set up for later use if building in Editing capabilities)
     func update(person: Person, name: String) {
         person.name = name
         
