@@ -12,8 +12,24 @@ class PairTableViewCell: UITableViewCell {
 
     // MARK: - Properties
     
+    @IBOutlet weak var person1LabelOutlet: UILabel!
+    @IBOutlet weak var person2LabelOutlet: UILabel!
+    
+    var person: Person? {
+        didSet {
+            updateViews()
+        }
+    }
+    
+    var pair: [Person]? {
+        didSet {
+            updateViews()
+        }
+    }
     
     
     // MARK: - Helper Functions
-
+    func updateViews() {
+        print("yay")
+    }
 }
