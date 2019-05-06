@@ -16,30 +16,35 @@ class PairingUpTableViewController: UITableViewController {
     
     var pairs: [[Person]] = []
     
+    @IBOutlet weak var randomizeButtonOutlet: UIButton!
+    
     
     // MARK: - ViewController Lifecycle Functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        if PersonModelController.shared.persons.count < 2 {
+            
+            randomizeButtonOutlet.isEnabled = false
+            
+        } else {
+            
+            randomizeButtonOutlet.isEnabled = true
+        }
     }
     
     
     // MARK: - Actions
     
     @IBAction func addPersonButtonTapped(_ sender: UIBarButtonItem) {
-        
         createAlert()
+        // ^^ this function is found int the helper function extension below
     }
     
     @IBAction func randomizeButtonTapped(_ sender: UIButton) {
-        
         createRandomPairs()
+        // ^^ this function is found int the helper function extension below
     }
     
 
@@ -49,6 +54,29 @@ class PairingUpTableViewController: UITableViewController {
         
         return sections.count
         
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let sectionHeaderView = UIView()
+        sectionHeaderView.backgroundColor = UIColor.white
+        
+        let avenirFont16 = [
+            NSAttributedString.Key.foregroundColor: UIColor.lightGray,
+            NSAttributedString.Key.font: UIFont(name: "Avenir-Medium", size: 16)! ]
+        
+        let label = UILabel()
+        label.attributedText = NSAttributedString(string: sections[section], attributes: avenirFont16)
+        label.frame = CGRect(x: 16, y: 0, width: 200, height: 40)
+        
+        sectionHeaderView.addSubview(label)
+        
+        return sectionHeaderView
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return 40
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,20 +93,30 @@ class PairingUpTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "pairCell", for: indexPath) as? PairTableViewCell else {
-            
-            print("ERROR: there was an error where a nil vlaue was found when creating the PairTableViewCell in PairingUpTableViewController.swift -> tableView(cellForRowAt:) - line 64.")
-            return UITableViewCell()
-        }
-        
         if indexPath.section == 0 {
             
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "pairCell", for: indexPath) as? PairTableViewCell else {
+                
+                print("ERROR: there was an error where a nil vlaue was found when creating the PairTableViewCell in PairingUpTableViewController.swift -> tableView(cellForRowAt:) - line 64.")
+                return UITableViewCell()
+            }
+            
             cell.person = PersonModelController.shared.persons[indexPath.row]
+            
+            return cell
+            
+        } else {
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "pairCell", for: indexPath) as? PairTableViewCell else {
+                
+                print("ERROR: there was an error where a nil vlaue was found when creating the PairTableViewCell in PairingUpTableViewController.swift -> tableView(cellForRowAt:) - line 64.")
+                return UITableViewCell()
+            }
+            
+            cell.pair = pairs[indexPath.section - 1]
+            
+            return cell
         }
- 
-        // Configure the cell...
-
-        return cell
     }
 
     // Override to support conditional editing of the table view.
@@ -97,6 +135,11 @@ class PairingUpTableViewController: UITableViewController {
             // Delete the row from the tableView
             tableView.deleteRows(at: [indexPath], with: .fade)
             
+            // set the randomize button to disabled if there are no people to pair
+            if PersonModelController.shared.persons.count < 2 {
+                
+                randomizeButtonOutlet.isEnabled = false
+            }
         }
     }
 }
@@ -128,6 +171,11 @@ extension PairingUpTableViewController {
                 
                 self.tableView.reloadData()
                 
+                if PersonModelController.shared.persons.count >= 2 {
+                    
+                    self.randomizeButtonOutlet.isEnabled = true
+                }
+                
             } else {
                 
                 return
@@ -138,10 +186,37 @@ extension PairingUpTableViewController {
         alert.addAction(add)
         
         self.present(alert, animated: true, completion: nil)
+        
     }
     
     func createRandomPairs() {
-        print("yay")
+        
+        pairs = []
+        
+        sections = ["people to be paired up"]
+        
+        var people = PersonModelController.shared.persons
+        
+        var pairCounter = 0
+        
+        if people.count >= 2 {
+            
+            people.shuffle()
+            
+            for person in people {
+                
+                pairs.append([person])
+                
+                pairCounter += 1
+                
+                let newSectionName = "Pair \(pairCounter)"
+                
+                sections.append(newSectionName)
+                
+                tableView.reloadData()
+                
+            }
+        }
     }
-    
+
 }
