@@ -21,7 +21,7 @@ class PairTableViewCell: UITableViewCell {
         }
     }
     
-    var pair: [Person]? {
+    var pair: (Person, Person)? {
         didSet {
             updateViews()
         }
@@ -37,6 +37,13 @@ class PairTableViewCell: UITableViewCell {
             
             person2LabelOutlet.text = ""
             
+        }
+        
+        if let pair = pair {
+            
+            person1LabelOutlet.text = pair.0.name ?? ""
+            
+            person2LabelOutlet.text = pair.1.name ?? ""
         }
     }
 }

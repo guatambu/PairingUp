@@ -33,11 +33,19 @@
                                         <action selector="randomizeButtonTapped:" destination="Qpc-9W-xYL" eventType="touchUpInside" id="QJH-4W-igs"/>
                                     </connections>
                                 </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="random pairing works best with 4 or more people" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="eAq-76-UwW">
+                                    <rect key="frame" x="29" y="0.0" width="356" height="20"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="neE-Tw-XJb" firstAttribute="centerY" secondItem="QWr-Dx-bVg" secondAttribute="centerY" id="W9L-dq-Jre"/>
+                                <constraint firstItem="eAq-76-UwW" firstAttribute="top" secondItem="QWr-Dx-bVg" secondAttribute="top" id="gWq-sG-dwa"/>
                                 <constraint firstItem="neE-Tw-XJb" firstAttribute="centerX" secondItem="QWr-Dx-bVg" secondAttribute="centerX" id="gv3-jM-Pe4"/>
+                                <constraint firstItem="eAq-76-UwW" firstAttribute="centerX" secondItem="QWr-Dx-bVg" secondAttribute="centerX" id="sJg-V4-eDS"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -90,6 +98,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="randomizeButtonOutlet" destination="neE-Tw-XJb" id="nUl-P9-rqc"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XcU-08-RKO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
